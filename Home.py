@@ -55,10 +55,10 @@ Sex = st.slider("กรุณาเลือกข้อมูล Sex")
 ChestPainType = st.slider("กรุณาเลือกข้อมูล Chest Pain Type")
 MaxHR = st.slider("กรุณาเลือกข้อมูล Max Heart Rate")
 
-Age = st.number_input("กรุณาเลือกข้อมูล Age")
-Sex = st.number_input("กรุณาเลือกข้อมูล Sex")
-ChestPainType = st.number_input("กรุณาเลือกข้อมูล Chest Pain Type")
-MaxHR = st.number_input("กรุณาเลือกข้อมูล Max Heart Rate")
+Age = st.number_input("กรุณาป้อนข้อมูล Age (อายุ)", min_value=0, max_value=120, value=50)
+Sex = st.number_input("กรุณาป้อนข้อมูล Sex (เพศ 0 หรือ 1)", min_value=0, max_value=1, value=1)
+ChestPainType = st.number_input("กรุณาป้อนข้อมูล Chest Pain Type (0-3)", min_value=0, max_value=3, value=0)
+MaxHR = st.number_input("กรุณาป้อนข้อมูล Max Heart Rate", min_value=60, max_value=220, value=150)
 
 if st.button("ทำนายผล"):
    #st.write("ทำนาย")
