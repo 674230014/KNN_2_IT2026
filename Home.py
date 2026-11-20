@@ -5,20 +5,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 st.header("โปรเจคการจำแนกผู้เป็นโรคหัวใจ")
-#st.image("./img/kairung022.jpg")
+#st.image("./img/chitsanupong.jpg")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-   st.header("Versicolor")
-   st.image("./img/iris1.jpg")
+   st.header("heartA")
+   st.image("./img/heartA.jpg")
 
 with col2:
-   st.header("Verginiga")
-   st.image("./img/iris2.jpg")
-
-with col3:
-   st.header("Setosa")
-   st.image("./img/iris3.jpg")
+   st.header("heartB")
+   st.image("./img/heartB.jpg")
 
 html_7 = """
 <div style="background-color:#EC7063;padding:15px;border-radius:15px 15px 15px 15px;border-style:'solid';border-color:black">
@@ -27,13 +23,13 @@ html_7 = """
 """
 st.markdown(html_7, unsafe_allow_html=True)
 st.markdown("")
-dt = pd.read_csv("./data/iris.csv")
+dt = pd.read_csv("./data/Heart3.csv")
 st.write(dt.head(10))
 
-dt1 = dt['petallength'].sum()
-dt2 = dt['petalwidth'].sum()
-dt3 = dt['sepallength'].sum()
-dt4 = dt['sepalwidth'].sum()
+dt1 = dt['Age'].mean()
+dt2 = dt['Sex'].mean()
+dt3 = dt['ChestPainType'].mean()
+dt4 = dt['MaxHR'].mean()
 
 dx = [dt1, dt2, dt3, dt4]
 dx2 = pd.DataFrame(dx, index=["d1", "d2", "d3", "d4"])
@@ -43,7 +39,7 @@ if st.button("แสดงการจินตทัศน์ข้อมูล
    st.bar_chart(dx2)
    st.button("ไม่แสดงข้อมูล")
 else:
-    st.write("ไม่แสดงข้อมูล")
+   st.write("ไม่แสดงข้อมูล")
 
 html_8 = """
 <div style="background-color:#6BD5DA;padding:15px;border-radius:15px 15px 15px 15px;border-style:'solid';border-color:black">
@@ -54,11 +50,15 @@ st.markdown(html_8, unsafe_allow_html=True)
 st.markdown("")
 
 
-pt_len = st.slider("กรุณาเลือกข้อมูล petal.length")
-pt_wd = st.slider("กรุณาเลือกข้อมูล petal.width")
+Age = st.slider("กรุณาเลือกข้อมูล Age")
+Sex = st.slider("กรุณาเลือกข้อมูล Sex")
+ChestPainType = st.slider("กรุณาเลือกข้อมูล Chest Pain Type")
+MaxHR = st.slider("กรุณาเลือกข้อมูล Max Heart Rate")
 
-sp_len = st.number_input("กรุณาเลือกข้อมูล sepal.length")
-sp_wd = st.number_input("กรุณาเลือกข้อมูล sepal.width")
+Age = st.number_input("กรุณาเลือกข้อมูล Age")
+Sex = st.number_input("กรุณาเลือกข้อมูล Sex")
+ChestPainType = st.number_input("กรุณาเลือกข้อมูล Chest Pain Type")
+MaxHR = st.number_input("กรุณาเลือกข้อมูล Max Heart Rate")
 
 if st.button("ทำนายผล"):
    #st.write("ทำนาย")
@@ -69,16 +69,15 @@ if st.button("ทำนายผล"):
    Knn_model = KNeighborsClassifier(n_neighbors=3)
    Knn_model.fit(X, y)  
 
-   x_input = np.array([[pt_len, pt_wd, sp_len, sp_wd]]) #ข้อมูลใหม่สำหรับทำนาย
+   x_input = np.array([[Age, Sex, ChestPainType, MaxHR]]) #ข้อมูลใหม่สำหรับทำนาย
 
    st.write(Knn_model.predict(x_input))   
    out=Knn_model.predict(x_input)
 
    if out[0] == 'Setosa':
-    st.image("./img/iris1.jpg")
-   elif out[0] == 'Versicolor':       
-    st.image("./img/iris2.jpg")
-   else:
-    st.image("./img/iris3.jpg")
+    st.image("./img/heartA.jpg")
+   else:     
+    st.image("./img/heartB.jpg")
+
 else:
     st.write("ไม่ทำนาย")
