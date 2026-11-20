@@ -19,6 +19,7 @@ from sklearn.preprocessing import FunctionTransformer, StandardScaler
 st.set_page_config(
     page_title="Heart KNN Classifier",
     page_icon="❤️",
+    page_image="./img/chitsanupong.jpg",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -217,7 +218,6 @@ with st.sidebar:
               delta_color="off")
     st.caption("ทดสอบกับข้อมูล 20% ที่โมเดลไม่เคยเห็น "
                "และใช้ข้อมูลทั้งหมดเมื่อทำนายผลจริง")
-    st.image("./img/chitsanupon.jpg", width="stretch")
 
 # --------------------------------------------------------------------------
 # Hero
