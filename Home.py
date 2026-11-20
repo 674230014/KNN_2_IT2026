@@ -64,19 +64,22 @@ if st.button("ทำนายผล"):
    #st.write("ทำนาย")
    #dt = pd.read_csv("./data/iris.csv") 
 
-   X = dt.drop('variety', axis=1)
-   y = dt.variety   
+   features = ['Age', 'Sex', 'ChestPainType', 'MaxHR']
+   X = dt[features]
+   y = dt['HeartDisease']
    Knn_model = KNeighborsClassifier(n_neighbors=3)
-   Knn_model.fit(X, y)  
+   Knn_model.fit(X, y)
 
-   x_input = np.array([[Age, Sex, ChestPainType, MaxHR]]) #ข้อมูลใหม่สำหรับทำนาย
+   x_input = pd.DataFrame([[Age, Sex, ChestPainType, MaxHR]], columns=features) #ข้อมูลใหม่สำหรับทำนาย
 
-   st.write(Knn_model.predict(x_input))   
-   out=Knn_model.predict(x_input)
+   out = Knn_model.predict(x_input)
+   st.write(out)
 
-   if out[0] == 'Setosa':
+   if out[0] == 0:
+    st.success("ผลการทำนาย: ไม่เป็นโรคหัวใจ")
     st.image("./img/heartA.jpg")
-   else:     
+   else:
+    st.error("ผลการทำนาย: เป็นโรคหัวใจ")
     st.image("./img/heartB.jpg")
 
 else:
